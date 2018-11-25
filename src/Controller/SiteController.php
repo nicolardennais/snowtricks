@@ -23,4 +23,10 @@ class SiteController extends AbstractController
     public function home(){
         return $this->render('site/home.html.twig');
     }
+    /**
+     * @Route("/site/12", name="site_show")
+     */
+    public function show(){
+        return $this->render('site/show.html.twig');
+    }
 }
