@@ -28,9 +28,13 @@ class SiteController extends AbstractController
         return $this->render('site/home.html.twig');
     }
     /**
-     * @Route("/site/12", name="site_show")
+     * @Route("/site/{id}", name="site_show")
      */
-    public function show(){
-        return $this->render('site/show.html.twig');
+    public function show($id){
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $article = $repo->find($id);
+        return $this->render('site/show.html.twig', [
+            'article' => $article
+        ]);
     }
 }
