@@ -13,11 +13,11 @@ class SiteController extends AbstractController
     public function index()
     {
         $repo = $this->getDoctrine()->getRepository(Article::class);
-        $articles = $repo->findAll();
+        $article = $repo->findAll();
 
         return $this->render('site/index.html.twig', [
             'controller_name' => 'SiteController',
-            'articles' => $articles
+            'article' => $article
         ]);
     }
 
