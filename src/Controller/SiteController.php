@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Entity\Article;
 class SiteController extends AbstractController
 {
     /**
@@ -12,8 +12,12 @@ class SiteController extends AbstractController
      */
     public function index()
     {
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repo->findAll();
+
         return $this->render('site/index.html.twig', [
             'controller_name' => 'SiteController',
+            'articles' => $articles
         ]);
     }
 

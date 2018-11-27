@@ -15,11 +15,12 @@ class ArticleFixtures extends Fixture
            $article->setTitle("Trick n°$i")
                    ->setContent("<p>Description du Trick n°$i</p>")
                    ->setImage("http://placehold.it/350x150")
-                   ->getCreatedAt (new \DateTime());
+                   ->setCreatedAt(new \DateTime());
 
            $manager->persist($article);
        }
 
         $manager->flush();
     }
+
 }

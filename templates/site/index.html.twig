@@ -5,36 +5,17 @@
 {% block body %}
     <section class="articles">
 
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">écrit le 238/11/2018 à 10h00 dans la catégorie Tricks</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta fugiat impedit, laboriosam pariatur
+        {% for article in articles %}
+             <article>
+                <h2>Titre de l'article</h2>
+                <div class="metadata">écrit le 238/11/2018 à 10h00 dans la catégorie Tricks</div>
+                <div class="content"><img src="http://placehold.it/350x150" alt="">
+                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta fugiat impedit, laboriosam pariatur
                     repudiandae rerum.</p>
-                <p>Illum obcaecati provident repudiandae? Aliquid distinctio dolorem explicabo possimus quis reiciendis
+                     <p>Illum obcaecati provident repudiandae? Aliquid distinctio dolorem explicabo possimus quis reiciendis
                     temporibus? Commodi necessitatibus, suscipit?</p>
                 <a href="{{ path('site_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">écrit le 238/11/2018 à 10h00 dans la catégorie Tricks</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus minus nobis perferendis sequi
-                    veniam. Voluptas.</p>
-                <p>Aliquam aspernatur beatae culpa dolorum, eum hic illum, laboriosam laborum, magni nulla praesentium
-                    quas vero?</p>
-                <a href="{{ path('site_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
-        <article>
-            <h2>Titre de l'article</h2>
-            <div class="metadata">écrit le 238/11/2018 à 10h00 dans la catégorie Tricks</div>
-            <div class="content"><img src="http://placehold.it/350x150" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda deleniti, dignissimos ea est in
-                    itaque!</p>
-                <p>Architecto consequuntur enim iure laboriosam nulla omnis tenetur vitae! Ad eaque enim nemo officia
-                    rerum!</p>
-                <a href="{{ path('site_show') }}" class="btn btn-primary">Lire la suite</a></div>
-        </article>
-
+             </article>
+        {% endfor %}
     </section>
 {% endblock %}
