@@ -9,7 +9,17 @@
 
     {{ form_start(formArticle) }}
 
-    {{ form_widget(formArticle) }}
+    {{ form_row(formArticle.title, {'attr': {'placeholder': "Nom du trick"}}) }}
+    {{ form_row(formArticle.content, {'attr': {'placeholder': "Explique ton trick"}}) }}
+    {{ form_row(formArticle.image, {'attr': {'palceholder': "Les photos de trick"}}) }}
+
+    <button type="submit" class="btn btn-success">
+        {%  if editMode %}
+            Enregistrer les modifications
+        {% else %}
+        Ajoutes ton snowtrick</button>
+
+        {% endif %}
 
     {{ form_end (formArticle) }}
 

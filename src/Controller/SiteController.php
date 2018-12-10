@@ -4,6 +4,9 @@ namespace App\Controller;
 
 
 
+use App\Form\ArticleType;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,8 +14,6 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
-
 
 class SiteController extends AbstractController
 {
@@ -39,35 +40,34 @@ class SiteController extends AbstractController
     }
     /**
      * @Route("/site/new", name="site_create")
+     * @Route("/site/{id}/edit",name="site_edit")
      */
-    public function create() {
+    public function form(Article $article = null, Request $request,
+                         ObjectManager $manager) {
+        if(!$article) {
+            $article = new Article();
+        }
 
-        $article = new Article();
 
-        $form = $this->createFormBuilder($article)
-                     ->add('title', TextType::class, [
-                         'attr' => [
-                             'placeholder' => "Nom du trick"
-                         ]
-                     ])
-                     ->add('content', TextareaType::class, [
-                         'attr' => [
+        $form = $this->createForm(ArticleType::class);
 
-                          'placeholder' => "Expliques le trick"
-                             ]
-                         ])
-                     ->add('image', TextType::class, [
-                         'attr' => [
-                             'placeholder' => "photos du trick"
-                         ]
-                     ])
-                     ->add('save', SubmitType::class, [
-                         'label' => 'Enregistrer'
-                     ])
-                     ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            if ($article->getId()){
+                $article->setCreatedAt(new \DateTime());
+            }
+
+
+            $manager->persist($article);
+            $manager->flush();
+
+            return $this->redirectToRoute('site_show', ['id' => $article->getId()]);
+        }
 
         return $this->render('site/create.html.twig', [
-            'formArticle' => $form->createView()
+            'formArticle' => $form->createView(),
+            'editMode' => $article->getId() !== null
         ]);
 
     }
